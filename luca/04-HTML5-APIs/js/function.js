@@ -1,8 +1,18 @@
 window.addEventListener('DOMContentLoaded', function() {
-    document.getElementById("btn-save").addEventListener('click', saveText);
-    document.getElementById("btn-delete").addEventListener('click', deleteText);
-});
+  document.getElementById("btn-save").addEventListener('click', saveText);
+  document.getElementById("btn-delete").addEventListener('click', deleteText);
 
+  /************************************
+   *Setup the Drag and Drop listeners.*
+   ************************************/
+  var dropZone = document.getElementById('in-text');
+  dropZone.addEventListener('dragover', handleDragOver, false);
+  dropZone.addEventListener('drop', handleFileSelect, false);
+});
+/**
+ * dataindex: Object used to store information for the databases
+ * @type {Object}
+ */
 let dataindex = {
   lcounter: 1
 };
@@ -19,6 +29,11 @@ function saveText() {
   }
 }
 
+
+/*******************************
+ * Function using localStorage *
+ *******************************/
+
 function localStore(id, text) {
   // Check browser support. Could use modernizr
   if (typeof(Storage) !== "undefined") {
@@ -29,9 +44,14 @@ function localStore(id, text) {
   }
 }
 
-window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
-function indexdatabase(id, text) {
 
+/*****************************
+ * Function using indexedDB  *
+ *****************************/
+
+window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB || window.shimIndexedDB;
+
+function indexdatabase(id, text) {
   // Open (or create) the database
   var open = window.indexedDB.open("MyData", 1);
 
@@ -61,8 +81,9 @@ function indexdatabase(id, text) {
   };
 }
 
-/* Delete the content from databases */
-
+/*************************************
+ *Delete the content from databases  *
+ *************************************/
 function deleteText() {
   if (dataindex.lcounter !== 1) {
     deleteLocalStorage();
@@ -89,5 +110,27 @@ function indexDBDelete(database) {
     console.log("Database deleted successfully");
     console.log(event.result); // should be undefined
   };
+}
 
+/**********************************************************
+ * Drag and Drop.                                         *
+ *Original from html5rocks and adapted to parse de input  *
+ *from the file in stackoverflow.                         *
+ **********************************************************/
+function handleFileSelect(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+
+  var files = evt.dataTransfer.files;
+  var reader = new FileReader();
+  reader.onload = function(event) {
+       document.getElementById('in-text').value = event.target.result;
+  };
+  reader.readAsText(files[0],"UTF-8");
+}
+
+function handleDragOver(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+  evt.dataTransfer.dropEffect = 'copy';
 }
