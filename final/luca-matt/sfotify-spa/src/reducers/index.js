@@ -1,9 +1,9 @@
-import songs from './songs';
-import artists from './artists';
-
 import { combineReducers } from 'redux';
 
-const rootReducer = combineReducers({
+import songs from './songReducer';
+import artist from './artistReducer';
+
+export default combineReducers({
   songs,
-  artists
-})
+  artist,
+});

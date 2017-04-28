@@ -1,3 +1,11 @@
 input {
   border-radius: 5px;
 }
+
+.inputSearch-size {
+  width: 50%;
+  margin-left: 25%;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 5px 0px 5px 0px;
+}

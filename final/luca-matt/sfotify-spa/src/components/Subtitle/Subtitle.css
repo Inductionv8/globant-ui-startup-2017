@@ -1,6 +1,15 @@
-h2{
-margin: 0 auto;
-text-align:center;
-width:100%;
+h2 {
+  width:100%;
+  color: #ffffff;
 }
 
+.subtitle-container {
+  width: 50%;
+  text-align:center;
+  margin-left: 25%;
+}
+
+.welcome-subtitle {
+  size: 25px;
+  margin-left: 25%;
+}

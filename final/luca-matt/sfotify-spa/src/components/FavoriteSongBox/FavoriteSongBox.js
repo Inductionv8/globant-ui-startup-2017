@@ -10,8 +10,8 @@ class FavoriteSongBox extends Component {
         </div>
         <div className="FavoriteSongBox-description">
           <p className="FavoriteSongBox-songName">{this.props.songName}</p>
-          <p className="FavoriteSongBox-artistName">{this.props.artistName}</p>
-          <p className="FavoriteSongBox-albumName">{this.props.albumName}</p>
+          <p className="FavoriteSongBox-artistName">Artist: {this.props.artistName}</p>
+          <p className="FavoriteSongBox-albumName">Album: {this.props.albumName}</p>
         </div>
       </div>
     );

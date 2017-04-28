@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
+import './InputSearch.css'
 
-class InputSearch extends React.Component {
+class InputSearch extends Component {
   render() {
-    return ( 
+    return (
       <div>
-        <input type = "text" id = "inputSearch" placeholder = "Search the name of your favorite artist">
+        <input className={this.props.inputSearch} type="text" id="inputSearch" placeholder="Search the name of your favorite artist">
         </input>
       </div>
     )
   }
 }
+
+InputSearch.defaultProps={
+  inputSearch: "inputSearch-size",
+}
+
+export default InputSearch;
